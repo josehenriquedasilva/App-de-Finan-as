@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IoRemoveCircle, IoAddCircleSharp } from "react-icons/io5";
+import { IoRemoveCircleSharp, IoAddCircleSharp } from "react-icons/io5";
 
  
 function Add_transacao({transacaoAdd, calculandoTransacoes}) {
@@ -28,7 +28,7 @@ function Add_transacao({transacaoAdd, calculandoTransacoes}) {
                         </button>
                         
                         <button className={`flex items-center justify-center w-1/2 text-cente font-medium text-red-400 bg-quinta rounded-sm hover:bg-nona hover:text-red-300 duration-250 cursor-pointer ${tipoTransacao ? '' : 'border border-amber-50'}`} onClick={() => setTipoTransacao(false)}>
-                            <IoRemoveCircle className="size-5 mr-[5px]"/>
+                            <IoRemoveCircleSharp className="size-5 mr-[5px]"/>
                             Despesa
                         </button>
                     </section>
