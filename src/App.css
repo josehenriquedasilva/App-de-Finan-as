@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+    /* Cor de Fundo */
+    --color-primeira: #144C50;
+    --color-segunda: #302E81;
+    --color-terceira: rgb(255 255 255 / 0.05);
+    --color-quarta: rgb(110 231 183 / 0.3);
+    --color-quinta: rgb(251 113 133 / 0.3);
+    --color-sexta: rgb(32 55 110 / 0.4);
+    --color-setima: #4A409B;
+    --color-oitava: rgba(45, 221, 151, 0.301);
+    --color-nona: rgba(252, 60, 89, 0.3);
+    --color-decima: rgba(255, 255, 255, 0.418);
+
+    /* Cor dos Botões*/
+    --color-l: #08B5D4;
+    --color-c: #5786E6;
+    --color-r: #A557F6;
+
+    --color-l2: #13899e;
+    --color-c2: #35579c;
+    --color-r2: #7439b4;
+}
+
+.text-gradient {
+    background-image: linear-gradient(to right, #3EC5F0, #A292F9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: rgba(255, 255, 255, 0.418);
+}
+
+.input-estilizado::-webkit-input-placeholder {
+  color: #e94848c0;
+  font-weight: bold;
+}
