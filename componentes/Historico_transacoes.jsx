@@ -2,7 +2,8 @@ import { FaCircleArrowUp } from "react-icons/fa6";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { HiTrash } from "react-icons/hi";
 
-function Historico_transacoes({transacoes, excluirTransacao, tratarValor}) {
+function Historico_transacoes({transacoes, excluirTransacao}) {
+
     return (
         <div className="flex flex-col w-4/5 max-w-250 bg-terceira border-1 border-slate-500 rounded-xl shadow-lg p-5 mb-5">
             <h3 className="text-2xl font-bold text-amber-50 mb-2">Transações</h3>
@@ -19,11 +20,11 @@ function Historico_transacoes({transacoes, excluirTransacao, tratarValor}) {
                             <p className="font-medium">{transacao.titulo}</p>
                         </div>
 
-                        <p className="font-medium">{transacao.receita ? <p className="text-green-600 text-sm md:text-base">+R${tratarValor(transacao.valor)}</p> : <p className="text-[#F22C3D]">-R${tratarValor(transacao.valor)}</p>}</p>
+                        <p className="font-medium">{transacao.receita ? <span className="text-green-600 text-sm md:text-base">+R${transacao.valor}</span> : <span className="text-[#F22C3D]">-R${transacao.valor}</span>}</p>
                         <HiTrash className="size-6 border border-red-300 rounded-2xl bg-red-500 p-[1.5px] cursor-pointer"
                         onClick={() => excluirTransacao(transacao)}/>
                     </li>
-                ))}</div> : <p className="text-amber-50 text-center p-8">Nenhuma transação registrada</p>}
+                ))}</div> : <p className="text-sm md:text-base text-amber-50 text-center p-8">Nenhuma transação registrada</p>}
             </ul>
         </div>
     );

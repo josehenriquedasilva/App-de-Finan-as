@@ -10,9 +10,21 @@ function Add_transacao({transacaoAdd, calculandoTransacoes}) {
     const verificaNumero = (Event) => {
         const valorInput = Event.target.value;
         const valorEmNumero = valorInput.replace(/[^0-9]/g, '');
-        setValorTransacao(valorEmNumero);
-    };
+           
+    let valorFormatado = valorEmNumero;
+    if (valorEmNumero.length === 3) {
+        valorFormatado = valorEmNumero.replace(/(\d)(\d{2})$/, "$1,$2");
+    } else if (valorEmNumero.length === 4) {
+        valorFormatado = valorEmNumero.replace(/(\d{2})(\d{2})$/, "$1,$2");
+    } else if (valorEmNumero.length === 5) {
+        valorFormatado = valorEmNumero.replace(/(\d{3})(\d{2})$/, "$1,$2");
+    } else if (valorEmNumero.length > 5) {
+        valorFormatado = valorEmNumero.replace(/(\d)(\d{3})(\d{2})$/, "$1.$2,$3");
+    }
+    setValorTransacao(valorFormatado);
+  };
 
+    
     return (
         <div className="flex flex-col gap-6 bg-terceira w-4/5 max-w-250 border-1 border-slate-500 rounded-xl shadow-lg p-5">
             <div>
@@ -38,6 +50,7 @@ function Add_transacao({transacaoAdd, calculandoTransacoes}) {
                         <input className="bg-sexta text-slate-100 p-1 border border-setima rounded-sm focus:outline-none focus:ring-1 focus:ring-black" type="text" placeholder="Título da Transação" value={tituloTransacao} onChange={(t) => setTituloTransacao(t.target.value)}/>
 
                         <input className="bg-sexta text-slate-100 p-1 border border-setima rounded-sm focus:outline-none focus:ring-1 focus:ring-black" type="text" onChange={verificaNumero} placeholder="Valor" value={valorTransacao}/>
+
                     
                         <button onClick={() => {
                             if (tituloTransacao === "" || valorTransacao === "") {

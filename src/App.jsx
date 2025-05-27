@@ -35,7 +35,7 @@ function App() {
     };
     setTransacoes([...transacoes, novaTransacao]);
   };
-
+  
   function tratarValor(valor) {
     return parseFloat(valor).toLocaleString("pt-BR", {
         minimumFractionDigits: 2,
@@ -43,35 +43,49 @@ function App() {
     });
   };
 
-  function excluirTransacao(transacaoClick) {
-    const novasTransacoes = transacoes.filter(transacao => transacao.id !== transacaoClick.id);
-    setTransacoes(novasTransacoes);
-    if (transacaoClick.receita === true) {
-      setbalanco(balanco - transacaoClick.valor)
-      setReceita(receita - transacaoClick.valor)
-      if (balanco - transacaoClick.valor < 0) {
-        setbalanco(0)
-      }
-    } else if (transacaoClick.receita === false) {
-      setDespesa(despesa - transacaoClick.valor)
-      setbalanco(receita)
-    }
-  };
-
   function calculandoTransacoes(valor, tipo) {
+    const valorSemFormato = valor.replace("R$ ", "").replace(/\./g, "").replace(",", ".");
+
+    const valorNumerico = parseFloat(valorSemFormato);
+
     if (tipo === true) {
-      setbalanco((balanco) => parseFloat(valor) + balanco)
-      setReceita((receita) => parseFloat(valor) + receita)
+      setbalanco((balancoAnterior) => balancoAnterior + valorNumerico);
+      setReceita((receitaAnterior) => receitaAnterior + valorNumerico);
     } else if (tipo === false) {
-      if (balanco - parseFloat(valor) <= 0) {
-        setbalanco(0)
-        setDespesa((despesa) => parseFloat(valor) + despesa)
+      if (balanco - valorNumerico <= 0) {
+        setbalanco(0);
+        setDespesa((despesaAnterior) => despesaAnterior + valorNumerico);
       } else {
-        setbalanco((balanco) => balanco - parseFloat(valor))
-        setDespesa((despesa) => parseFloat(valor) + despesa)
+        setbalanco((balancoAnterior) => balancoAnterior - valorNumerico);
+        setDespesa((despesaAnterior) => despesaAnterior + valorNumerico);
       }
     }
-  };
+  }
+
+function excluirTransacao(transacaoClick) {
+  const novasTransacoes = transacoes.filter(
+    (transacao) => transacao.id !== transacaoClick.id
+  );
+  setTransacoes(novasTransacoes);
+
+  const valorSemFormato = transacaoClick.valor
+    .replace("R$ ", "")
+    .replace(/\./g, "")
+    .replace(",", ".");
+  const valorNumerico = parseFloat(valorSemFormato);
+
+  if (transacaoClick.receita === true) {
+    setbalanco((balancoAnterior) => balancoAnterior - valorNumerico);
+    setReceita((receitaAnterior) => receitaAnterior - valorNumerico);
+    if (balanco - valorNumerico < 0) {
+      setbalanco(0);
+    }
+  } else if (transacaoClick.receita === false) {
+    setDespesa((despesaAnterior) => despesaAnterior - valorNumerico);
+    setbalanco(receita)
+  }
+}
+
 
   return (
     <div className="min-h-screen flex flex-col items-center gap-5 bg-gradient-to-br from-primeira to-segunda">
@@ -89,7 +103,6 @@ function App() {
       />
       <Historico_transacoes 
       transacoes={transacoes}
-      tratarValor={tratarValor}
       excluirTransacao={excluirTransacao}
       />
     </div>
