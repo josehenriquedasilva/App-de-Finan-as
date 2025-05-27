@@ -11,7 +11,7 @@ function Resumo({balanco, receita, despesa, tratarValor}) {
             <div className="flex justify-around gap-2 md:justify-around md:gap-12 pt-2 md:pt-5">
                 <section className="text-center md:text-left md:bg-slate-800 md:min-w-40 md:h-24 md:rounded-lg">
                     <h4 className="md:text-lg md:flex md:items-center text-amber-50 font-bold m-1.5"><FaScaleUnbalancedFlip className="text-blue-500 ml-5.5 md:ml-0 md:mr-2.5"/>
-                        Balanço</h4>
+                        Disponível</h4>
                     <p className="text-xs md:p-1 md:text-2xl font-bold md:m-1.5 text-green-500">R$ {tratarValor(balanco)}</p>
                 </section>
                 <section className="text-center md:text-left md:bg-slate-800 md:min-w-40 md:h-24 md:rounded-lg">
